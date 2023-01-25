@@ -43,7 +43,7 @@ def main():
     run.log("Accuracy", np.float(accuracy))
     run.log("F1Score", f1_score(y_test, y_pred))
     
-    labels = np.union(y_pred, y_test).tolist()
+    labels = np.union1d(y_pred, y_test).tolist()
     cmtx = confusion_matrix(y_test, y_pred, labels=labels)
     cmtx = {"class_labels": labels,
             "matrix": [[int(y) for y in x] for x in cmtx]}
