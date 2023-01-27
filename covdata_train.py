@@ -7,7 +7,7 @@ from sklearn.model_selection import train_test_split
 import pandas as pd
 from azureml.core.run import Run
 from azureml.core.dataset import Dataset
-from sklearn.metrics import confusion_matrix, f1_score
+from sklearn.metrics import confusion_matrix, f1_score, roc_auc_score
 
 def main():
     # Add arguments to script
@@ -34,7 +34,7 @@ def main():
 
     y = ds['y']
 
-    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.33, random_state=43)
+    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.33)
 
     model = GBC(learning_rate=args.learning_rate, n_estimators=args.n_estimators, subsample=args.subsample).fit(x_train, y_train)
 
@@ -42,11 +42,12 @@ def main():
     y_pred = model.predict(x_test)
     run.log("Accuracy", np.float(accuracy))
     run.log("F1Score", f1_score(y_test, y_pred))
+    run.log("AUC_weighted", roc_auc_score(y_test, y_pred, average='weighted'))
     
     labels = np.union1d(y_pred, y_test).tolist()
     cmtx = confusion_matrix(y_test, y_pred, labels=labels)
-    cmtx = {"class_labels": labels,
-            "matrix": [[int(y) for y in x] for x in cmtx]}
+    cmtx = {"schema_type": "confusion_matrix", "schema_version": "1.0.0", "data": {"class_labels": labels,
+            "matrix": [[int(y) for y in x] for x in cmtx]}}
 
     run.log_confusion_matrix('Confusion matrix', cmtx)
     
