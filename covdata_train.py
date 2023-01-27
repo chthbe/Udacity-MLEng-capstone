@@ -34,7 +34,7 @@ def main():
 
     y = ds['y']
 
-    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.33)
+    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.33, random_state=43)
 
     model = GBC(learning_rate=args.learning_rate, n_estimators=args.n_estimators, subsample=args.subsample).fit(x_train, y_train)
 
