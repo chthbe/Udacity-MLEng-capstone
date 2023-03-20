@@ -35,7 +35,7 @@ The best model reached an AUC_weighted of 0.753 and an accuracy of 94.8%. This w
 
 ## Model Deployment
 There are 2 different deployments for the hyperparameter tuned model, one as a local webservice to test and one as an ACI based endpoint with key authentication. The inference is steered through the covdata_entry.py entry script. To deploy another model only the model name in the code and the endpoint name need to be adapted.
-![Healthy model endpoint](./screenshots/Healthy_Endpoint.PNG)
+![Healthy model endpoint](./screenshots/Healthy_endpoint.PNG)
 
 ### Querying the endpoint
 The output can be queried through a simple post request. See an example of the input and request below:
