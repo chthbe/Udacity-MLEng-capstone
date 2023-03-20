@@ -23,7 +23,7 @@ The autoML loads the dataset registered in the Hyperparameter tuning model (run 
 
 ### Results
 The best model was a Voting Ensemble and reached an AUC-weighted metric of 0.966 and an accuracy of 95.0% using:
-![Models used in Voting Ensemble](.\screenshots\AutoML_VotingEnsembleModels.PNG)
+![Models used in Voting Ensemble](./screenshots/AutoML_VotingEnsembleModels.PNG)
 
 ## Hyperparameter Tuning
 For the hyperparameter tuning part, a gradient boosting tree classifier was selected. It was steered through a training script and optimised along 3 variables: the number of estimators, the learning rate and the subsampling rate.
@@ -35,11 +35,11 @@ The best model reached an AUC_weighted of 0.753 and an accuracy of 94.8%. This w
 
 ## Model Deployment
 There are 2 different deployments for the hyperparameter tuned model, one as a local webservice to test and one as an ACI based endpoint with key authentication. The inference is steered through the covdata_entry.py entry script. To deploy another model only the model name in the code and the endpoint name need to be adapted.
-![Healthy model endpoint](./screenshots/Healthy_Endpoint.png)
+![Healthy model endpoint](./screenshots/Healthy_Endpoint.PNG)
 
 ### Querying the endpoint
 The output can be queried through a simple post request. See an example of the input and request below:
-![Example of endpoint input and request](./screenshots/QueryModelEndpoint.png)
+![Example of endpoint input and request](./screenshots/QueryModelEndpoint.PNG)
 Here for security reasons the URL and key are in a variable. It is easy just to replace both with thecorresponding string to allow general access.
 
 ## Screen Recording
